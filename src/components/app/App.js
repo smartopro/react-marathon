@@ -31,12 +31,7 @@ function App() {
                         key={pokemon?.id}
                         type={pokemon?.type}
                         name={pokemon?.name}
-                        position={{
-                            top: pokemon?.values?.top,
-                            right: pokemon?.values?.right,
-                            bottom: pokemon?.values?.bottom,
-                            left: pokemon?.values?.left
-                        }}
+                        position={pokemon?.values}
                         img={{
                             src: pokemon?.img,
                             alt: pokemon?.name
