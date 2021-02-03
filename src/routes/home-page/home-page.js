@@ -7,8 +7,6 @@ import {Layout} from "../../components/layout/layout.js";
 // Assets
 import bg1 from "../../assets/bg1.jpg";
 import bg2 from "../../assets/bg2.jpg";
-import {PokemonCard} from "../../components/pokemon-card/pokemon-card.js";
-import POKEMONS from "../../assets/pokemons.json";
 
 function HomePage() {
   return (
