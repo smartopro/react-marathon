@@ -22,7 +22,7 @@ function App() {
             </Route>
             <Route>
                 <>
-                    <MenuHeader bgActive={!match.isExact} />
+                    <MenuHeader bgActive={!match.isExact}/>
                     <div className={cn(s.wrap, {[s.isHomePage]: match.isExact})}>
                         <Switch>
                             <Route path="/" exact component={HomePage} />
