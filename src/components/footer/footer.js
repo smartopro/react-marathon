@@ -1,6 +1,6 @@
 import s from "./footer.module.css";
 
-export const Footer = () => (
+const Footer = () => (
     <footer>
         <div className={s.wrapper}>
             <h3>THANKS FOR VISITING</h3>
@@ -8,3 +8,5 @@ export const Footer = () => (
         </div>
     </footer>
 )
+
+export default Footer;
