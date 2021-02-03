@@ -4,14 +4,12 @@ import NavBar from "../nav-bar/nav-bar.js";
 import Menu from "../menu/menu.js";
 
 const MenuHeader = () => {
-    const [active, setActive] = useState(false);
-
-    const setMenuState = state => setActive(state);
+    const [isActive, setActive] = useState(false);
 
     return (
         <>
-            <Menu menuState={active} />
-            <NavBar setMenuState={setMenuState} />
+            <Menu isActive={isActive} />
+            <NavBar setActive={setActive} isActive={isActive} />
         </>
     )
 }
