@@ -37,7 +37,6 @@ function GamePage() {
             [newKey]: Object.values(pokemons)[randomPokemonNumber]
         }
 
-        console.log(newPokemon);
         dataBase.ref('pokemons/' + newKey).set(newPokemon[newKey]);
         setPokemons({ ...pokemons, ...newPokemon });
     }
