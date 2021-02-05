@@ -8,6 +8,12 @@ import {PokemonCard} from "../../components/pokemon-card/pokemon-card.js";
 function GamePage() {
     const [pokemons, setPokemons] = useState(() => POKEMONS);
 
+    const onClickHandler = id => {
+        setPokemons(prevPokemons => prevPokemons.map(
+            p => p.id === id ? {...p, active: !p.active} : p
+        ))
+    }
+
     return (
         <div className={s.root}>
             <div className={s.flex}>
@@ -23,12 +29,7 @@ function GamePage() {
                             alt: p?.name
                         }}
                         isActive={p?.active}
-                        onClickHandler={id => {
-                            const localPokemons = [...pokemons];
-                            const pokemon = localPokemons.find(p => p.id === id);
-                            pokemon["active"] = !pokemon?.active;
-                            setPokemons(localPokemons);
-                        }}
+                        onClickHandler={onClickHandler}
                     />) : <p>No pokemons found</p>
                 }
             </div>
