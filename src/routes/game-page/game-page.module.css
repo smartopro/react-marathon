@@ -9,19 +9,19 @@
     flex-wrap: wrap;
 }
 
-/*.btnExit {*/
-/*    display: block;*/
-/*    border: 2px solid #b900c3;*/
-/*    background-color: transparent;*/
-/*    padding: 20px 50px;*/
-/*    color: #000;*/
-/*    font-family: 'Overlock', Arial, Helvetica, sans-serif;*/
-/*    font-size: 2.5em;*/
-/*    margin-top: 20px;*/
-/*}*/
+.btnAdd {
+    display: block;
+    margin: 20px auto;
+    border: 2px solid #b900c3;
+    background-color: transparent;
+    padding: 20px 50px;
+    color: #000;
+    font-family: 'Overlock', Arial, Helvetica, sans-serif;
+    font-size: 2.5em;
+}
 
-/*.btnExit:hover {*/
-/*    cursor: pointer;*/
-/*    color: #000;*/
-/*    background-color: #b900c3;*/
-/*}*/
+.btnAdd:hover {
+    cursor: pointer;
+    color: #FFF;
+    background-color: #b900c3;
+}

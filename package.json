@@ -5,6 +5,7 @@
   "author": "Ilia Chernetskii <ilya.chernetsky@gmail.com>",
   "dependencies": {
     "classnames": "^2.2.6",
+    "firebase": "^8.2.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
