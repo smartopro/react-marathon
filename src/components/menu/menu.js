@@ -1,33 +1,40 @@
+import {Link} from "react-router-dom";
+
 import cn from "classnames";
 
 import s from "./menu.module.css";
 
 const routes = [
     {
-        link: "#welcome",
+        link: "/",
         label: "HOME"
     }, {
-        link: "#game",
+        link: "/game",
         label: "GAME"
     }, {
-        link: "#about",
+        link: "/about",
         label: "ABOUT"
     }, {
-        link: "#contact",
+        link: "/contact",
         label: "CONTACT"
     }
 ]
 
-function Menu({isActive}) {
+function Menu({isActive, setActive}) {
     return (
-        <div className={cn(s.menuContainer, isActive ? s.active : s.deactive)}>
+        <div className={cn(s.menuContainer, {
+            [s.active]: isActive === true,
+            [s.deactive]: isActive === false
+        })}>
             <div className={s.overlay} />
             <div>
                 <ul>
                     {
                         routes.map(route => (
-                            <li>
-                                <a href={route.link}>{route.label}</a>
+                            <li key={route.link}>
+                                <Link to={route.link} onClick={() => setActive(false)}>
+                                    {route.label}
+                                </Link>
                             </li>
                         ))
                     }

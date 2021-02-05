@@ -1,23 +1,17 @@
+import {Link} from "react-router-dom";
+
 // Components
 import {Header} from "../../components/header/header.js";
 import {Layout} from "../../components/layout/layout.js";
-import {Footer} from "../../components/footer/footer.js";
-import MenuHeader from "../../components/menu-header/menu-header.js";
 
 // Assets
 import bg1 from "../../assets/bg1.jpg";
 import bg2 from "../../assets/bg2.jpg";
-import {PokemonCard} from "../../components/pokemon-card/pokemon-card.js";
-import POKEMONS from "../../assets/pokemons.json";
 
-// CSS
-import s from "./home-page.module.css";
-
-function HomePage({onStartGameHandler}) {
+function HomePage() {
   return (
     <>
-        <MenuHeader />
-        <Header title="This is title" descr="This is Description!" onStartGameHandler={onStartGameHandler} />
+        <Header title="This is title" descr="This is Description!" />
         <Layout id="layout-1" title="This is layout #1" descr="This is description of layout #1!" colorBg="#fcde08" urlBg={bg1}>
             <p>
                 In the game two players face off against one another, one side playing as "blue", the other as "red" on a 3x3 grid.
@@ -27,27 +21,14 @@ function HomePage({onStartGameHandler}) {
             </p>
         </Layout>
         <Layout id="layout-2" title="This is layout #2" descr="This is description of layout #2!" colorBg="#fcde08">
-            <div className={s.flex}>
-                {
-                    POKEMONS ? POKEMONS.map(pokemon => <PokemonCard
-                        key={pokemon?.id}
-                        type={pokemon?.type}
-                        name={pokemon?.name}
-                        position={pokemon?.values}
-                        img={{
-                            src: pokemon?.img,
-                            alt: pokemon?.name
-                        }}
-                    />) : <p>No pokemons found</p>
-                }
-            </div>
+            <p>Pokemons was here...</p>
+            <Link to="/game">Start the Game</Link>
         </Layout>
         <Layout id="layout-3" title="This is layout #3" descr="This is description of layout #3!" colorBg="#fcde08" urlBg={bg2}>
             <p>
                 Layout #3
             </p>
         </Layout>
-        <Footer />
     </>
   );
 }

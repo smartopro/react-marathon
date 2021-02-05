@@ -27,10 +27,30 @@
     transform-style: preserve-3d;
     transition: .6s .1s;
     transform: rotateY(180deg);
+    animation: flipBack 1000ms forwards;
+    cursor: pointer;
 }
 
 .pokemonCard.active {
-    transform: rotateY(0deg);
+    animation: flipFront 1000ms forwards;
+}
+
+@keyframes flipFront {
+    from {
+        transform: rotateY(180deg);
+    }
+    to {
+        transform: rotateY(0deg);
+    }
+}
+
+@keyframes flipBack {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(180deg);
+    }
 }
 
 .cardFront,
