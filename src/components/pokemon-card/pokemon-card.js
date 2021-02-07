@@ -7,13 +7,14 @@ export const PokemonCard = ( {
     isActive = false,
     onClickHandler,
     id,
+    baseId,
     name,
     type,
     position: { top, right, bottom, left },
     img: { src, alt }
                              }) => {
     return (
-        <div className={s.root} onClick={() => onClickHandler(id)}>
+        <div className={s.root} onClick={() => onClickHandler(baseId)}>
             <div className={ cn(s.pokemonCard, { [s.active]: isActive }) }>
                 <div className={s.cardFront}>
                     <div className={cn(s.wrap, s.front)}>
