@@ -9,24 +9,30 @@ function GamePage() {
     const [pokemons, setPokemons] = useState({});
 
     const onCardClickHandler = baseId => {
-        setPokemons(prevPokemons =>
-            Object.fromEntries(
-                Object.entries(prevPokemons)
-                    .map(
-                        ([key, p]) => {
-                            if (key === baseId) {
-                                let pokemon = {...p, active: !p.active};
+        Object.fromEntries(
+            Object.entries(pokemons)
+                .map(
+                    ([key, p]) => {
+                        if (key === baseId) {
+                            let pokemon = {...p, active: !p.active};
 
-                                // Save pokemon in DB
-                                dataBase.ref(`pokemons/${key}`).set(pokemon);
+                            // Save pokemon in DB
+                            dataBase
+                                .ref(`pokemons/${key}`)
+                                .set(pokemon)
+                                .then(() => {
+                                    setPokemons(prevPokemons => ({
+                                        ...prevPokemons,
+                                        [key]: pokemon
+                                    }));
+                                });
 
-                                return [key, pokemon]
-                            }
-                            else return [key, p]
+                            return [key, pokemon]
                         }
-                    )
-            )
-        );
+                        else return [key, p]
+                    }
+                )
+        )
     }
 
     const onBtnAddClickHandler = () => {
@@ -37,8 +43,12 @@ function GamePage() {
             [newKey]: Object.values(pokemons)[randomPokemonNumber]
         }
 
-        dataBase.ref('pokemons/' + newKey).set(newPokemon[newKey]);
-        setPokemons({ ...pokemons, ...newPokemon });
+        dataBase
+            .ref('pokemons/' + newKey)
+            .set(newPokemon[newKey])
+            .then(() => {
+                setPokemons(prevPokemons => ({ ...prevPokemons, ...newPokemon }));
+            });
     }
 
     useEffect(() => {
