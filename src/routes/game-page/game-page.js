@@ -9,30 +9,18 @@ function GamePage() {
     const [pokemons, setPokemons] = useState({});
 
     const onCardClickHandler = baseId => {
-        Object.fromEntries(
-            Object.entries(pokemons)
-                .map(
-                    ([key, p]) => {
-                        if (key === baseId) {
-                            let pokemon = {...p, active: !p.active};
+        const pokemon = { ...pokemons[baseId], active: !pokemons[baseId].active  };
 
-                            // Save pokemon in DB
-                            dataBase
-                                .ref(`pokemons/${key}`)
-                                .set(pokemon)
-                                .then(() => {
-                                    setPokemons(prevPokemons => ({
-                                        ...prevPokemons,
-                                        [key]: pokemon
-                                    }));
-                                });
-
-                            return [key, pokemon]
-                        }
-                        else return [key, p]
-                    }
-                )
-        )
+        // Save pokemon in DB
+        dataBase
+            .ref(`pokemons/${baseId}`)
+            .set(pokemon)
+            .then(() => {
+                setPokemons(prevPokemons => ({
+                    ...prevPokemons,
+                    [baseId]: pokemon
+                }));
+            });
     }
 
     const onBtnAddClickHandler = () => {
