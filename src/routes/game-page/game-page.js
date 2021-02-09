@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useCallback} from "react";
 import {Route, Switch, useRouteMatch} from "react-router-dom";
 
 // Components
@@ -24,9 +24,9 @@ const GamePage = () => {
         setPokemons(prevPokemons => prevPokemons.filter(p => p.id !== pokemon.id));
     }
 
-    const clearPokemons = () => {
+    const clearPokemons = useCallback(() => {
         setPokemons([]);
-    }
+    }, [])
 
     return (
         <PokemonContext.Provider value={{ pokemons, addPokemon, deletePokemon, clearPokemons }}>
