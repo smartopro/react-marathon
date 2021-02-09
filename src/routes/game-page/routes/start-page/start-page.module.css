@@ -1,0 +1,27 @@
+.root {
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.btnStart {
+    display: inline-block;
+    margin: 20px auto;
+    border: 2px solid #b900c3;
+    background-color: transparent;
+    padding: 20px 50px;
+    color: #000;
+    font-family: 'Overlock', Arial, Helvetica, sans-serif;
+    font-size: 2.5em;
+}
+
+.btnStart:hover {
+    cursor: pointer;
+    color: #FFF;
+    background-color: #b900c3;
+}
