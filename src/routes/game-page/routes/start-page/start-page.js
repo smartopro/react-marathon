@@ -42,7 +42,7 @@ function StartPage() {
             setPokemons(poks);
         });
         clearSelectedPokemons();
-    }, [firebase]);
+    }, [firebase, clearSelectedPokemons]);
 
     return (
         <div className={s.root}>
