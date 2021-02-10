@@ -1,77 +1,42 @@
-import {useEffect, useState} from "react";
+import {useState, useCallback} from "react";
+import {Route, Switch, useRouteMatch} from "react-router-dom";
+
+// Components
+import StartPage from "./routes/start-page/start-page.js";
+import BoardPage from "./routes/board-page/board-page.js";
+import FinishPage from "./routes/finish-page/finish-page.js";
+
+// Context
+import {PokemonContext} from "../../context/pokemonContext.js";
 
 // CSS
-import s from "./game-page.module.css";
-import {PokemonCard} from "../../components/pokemon-card/pokemon-card.js";
-import dataBase from "../../services/firebase.js";
+// import s from "./game-page.module.css";
 
-function GamePage() {
-    const [pokemons, setPokemons] = useState({});
+const GamePage = () => {
+    const [pokemons, setPokemons] = useState([]);
+    const match = useRouteMatch();
 
-    const onCardClickHandler = baseId => {
-        const pokemon = { ...pokemons[baseId], active: !pokemons[baseId].active  };
-
-        // Save pokemon in DB
-        dataBase
-            .ref(`pokemons/${baseId}`)
-            .set(pokemon)
-            .then(() => {
-                setPokemons(prevPokemons => ({
-                    ...prevPokemons,
-                    [baseId]: pokemon
-                }));
-            });
+    const addPokemon = pokemon => {
+        setPokemons(prevPokemons => [...prevPokemons, pokemon]);
     }
 
-    const onBtnAddClickHandler = () => {
-        const newKey = dataBase.ref().child("pokemons").push().key;
-        const pokemonsCount = Object.keys(pokemons).length;
-        const randomPokemonNumber = Math.floor(Math.random() * pokemonsCount); // [0 .. pokemonsCount-1]
-        const newPokemon = {
-            [newKey]: Object.values(pokemons)[randomPokemonNumber]
-        }
-
-        dataBase
-            .ref('pokemons/' + newKey)
-            .set(newPokemon[newKey])
-            .then(() => {
-                setPokemons(prevPokemons => ({ ...prevPokemons, ...newPokemon }));
-            });
+    const deletePokemon = pokemon => {
+        setPokemons(prevPokemons => prevPokemons.filter(p => p.id !== pokemon.id));
     }
 
-    useEffect(() => {
-        dataBase.ref("pokemons").once("value", snapshot => {
-            setPokemons(snapshot.val());
-        })
-    }, []);
+    const clearPokemons = useCallback(() => {
+        setPokemons([]);
+    }, [])
 
     return (
-        <div className={s.root}>
-            <button className={s.btnAdd} onClick={onBtnAddClickHandler}>Add random</button>
-            <div className={s.flex}>
-                {
-                    pokemons
-                        ? Object.entries(pokemons).map(([key, p]) =>
-                            <PokemonCard
-                                key={key}
-                                baseId={key}
-                                id={p?.id}
-                                type={p?.type}
-                                name={p?.name}
-                                position={p?.values}
-                                img={{
-                                    src: p?.img,
-                                    alt: p?.name
-                                }}
-                                isActive={p?.active}
-                                onClickHandler={onCardClickHandler}
-                            />
-                        )
-                        : <p>No pokemons found</p>
-                }
-            </div>
-        </div>
+        <PokemonContext.Provider value={{ pokemons, addPokemon, deletePokemon, clearPokemons }}>
+            <Switch>
+                <Route path={`${match.path}/`} exact component={StartPage} />
+                <Route path={`${match.path}/board`} component={BoardPage} />
+                <Route path={`${match.path}/finish`} component={FinishPage} />
+            </Switch>
+        </PokemonContext.Provider>
     );
-}
+};
 
 export default GamePage;
