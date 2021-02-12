@@ -42,6 +42,7 @@ function StartPage() {
             setPokemons(poks);
         });
         clearSelectedPokemons();
+        return () => firebase.offPokemonsSocket()
     }, [firebase, clearSelectedPokemons]);
 
     return (

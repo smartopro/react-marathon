@@ -15,8 +15,8 @@ export const PokemonCard = ( {
     baseId,
     name,
     type,
-    position: { top, right, bottom, left },
-    img: { src, alt }
+    position: { top, right, bottom, left } = {},
+    img: { src = "", alt = "" } = {}
                              }) => {
     return (
         <div

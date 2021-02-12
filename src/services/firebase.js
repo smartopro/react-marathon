@@ -33,6 +33,12 @@ export default class Firebase {
             })
     }
 
+    offPokemonsSocket() {
+        return this.database
+            .ref("pokemons")
+            .off();
+    }
+
     postPokemon(key, pokemon) {
         this.database
             .ref(`pokemons/${key}`)

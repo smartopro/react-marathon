@@ -1,4 +1,5 @@
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
+import {useHistory} from "react-router-dom";
 
 // Context
 import {PokemonContext} from "../../../../context/pokemonContext.js";
@@ -11,6 +12,19 @@ import s from './board-page.module.css';
 
 const BoardPage = () => {
     const {pokemons} = useContext(PokemonContext);
+    const [board, setBoard] = useState([]);
+    const history = useHistory();
+    // if (!Object.keys(pokemons).length) history.replace("/game");
+
+    useEffect(async() => {
+        const boardRequest = await fetch("https://reactmarathon-api.netlify.app/api/board");
+        const boardResponse = await boardRequest.json();
+        setBoard(boardResponse.data);
+    }, []);
+
+    const onBoardClickHandler = position => {
+        console.log(position);
+    }
 
     return (
         <div className={s.root}>
@@ -39,15 +53,19 @@ const BoardPage = () => {
                 }
             </div>
             <div className={s.board}>
-                <div className={s.boardPlate}>1</div>
-                <div className={s.boardPlate}>2</div>
-                <div className={s.boardPlate}>3</div>
-                <div className={s.boardPlate}>4</div>
-                <div className={s.boardPlate}>5</div>
-                <div className={s.boardPlate}>6</div>
-                <div className={s.boardPlate}>7</div>
-                <div className={s.boardPlate}>8</div>
-                <div className={s.boardPlate}>9</div>
+                {
+                    board.map(b => (
+                        <div
+                            key={b.position}
+                            className={s.boardPlate}
+                            onClick={() => {
+                                !b.card && onBoardClickHandler(b.position)
+                            }}
+                        >
+                            {/*b.card && <PokemonCard {...b} minimize={true} />*/}
+                        </div>)
+                    )
+                }
             </div>
         </div>
     );
