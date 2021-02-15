@@ -47,7 +47,7 @@ function StartPage() {
 
     return (
         <div className={s.root}>
-            <Link to="./game/board" className={s.btnStart}>Start game</Link>
+            <Link to="/game/board" className={s.btnStart}>Start game</Link>
             <div className={s.flex}>
                 {
                     pokemons
@@ -58,11 +58,9 @@ function StartPage() {
                                 id={p?.id}
                                 type={p?.type}
                                 name={p?.name}
-                                position={p?.values}
-                                img={{
-                                    src: p?.img,
-                                    alt: p?.name
-                                }}
+                                values={p?.values}
+                                img={p?.img}
+                                alt={p?.name}
                                 isActive={p?.active}
                                 isSelected={p?.isSelected}
                                 onClickHandler={onCardClickHandler}

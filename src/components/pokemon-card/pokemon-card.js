@@ -15,13 +15,15 @@ export const PokemonCard = ( {
     baseId,
     name,
     type,
-    position: { top, right, bottom, left } = {},
-    img: { src = "", alt = "" } = {}
-                             }) => {
+    values,
+    img,
+    alt,
+    possession
+}) => {
     return (
         <div
             className={cn(s.root, {[s[rootClassName]]: !!rootClassName})}
-            onClick={() => onClickHandler(baseId)}
+            onClick={() => onClickHandler(baseId, id)}
             style={{
                 maxWidth, maxHeight
             }}
@@ -29,15 +31,15 @@ export const PokemonCard = ( {
             <div className={cn(s.pokemonCard, {[s[cardClassName]]: !!cardClassName, [s.active]: isActive, [s.selected]: isSelected})}>
                 <div className={s.cardFront}>
                     <div className={cn(s.wrap, s.front)}>
-                        <div className={cn(s.pokemon, s[type])}>
+                        <div className={cn(s.pokemon, s[type], s[possession])}>
                             <div className={s.values}>
-                                <div className={cn(s.count, s.top)}>{top}</div>
-                                <div className={cn(s.count, s.right)}>{right}</div>
-                                <div className={cn(s.count, s.bottom)}>{bottom}</div>
-                                <div className={cn(s.count, s.left)}>{left}</div>
+                                <div className={cn(s.count, s.top)}>{values.top}</div>
+                                <div className={cn(s.count, s.right)}>{values.right}</div>
+                                <div className={cn(s.count, s.bottom)}>{values.bottom}</div>
+                                <div className={cn(s.count, s.left)}>{values.left}</div>
                             </div>
                             <div className={s.imgContainer}>
-                                <img src={src} alt={alt} />
+                                <img src={img} alt={alt} />
                             </div>
                             { !minimize && (<div className={s.info}>
                                 <span className={s.number}>#{id}</span>

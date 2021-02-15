@@ -14,6 +14,8 @@ import {PokemonContext} from "../../context/pokemonContext.js";
 
 const GamePage = () => {
     const [pokemons, setPokemons] = useState([]);
+    const [player2Pokemons, setPlayer2Pokemons] = useState([]);
+    const [winner, setWinner] = useState(null);
     const match = useRouteMatch();
 
     const addPokemon = pokemon => {
@@ -28,8 +30,22 @@ const GamePage = () => {
         setPokemons([]);
     }, [])
 
+    const clearPlayer2Pokemons = useCallback(() => {
+        setPlayer2Pokemons([]);
+    }, [])
+
     return (
-        <PokemonContext.Provider value={{ pokemons, addPokemon, deletePokemon, clearPokemons }}>
+        <PokemonContext.Provider value={{
+            pokemons,
+            addPokemon,
+            deletePokemon,
+            clearPokemons,
+            player2Pokemons,
+            setPlayer2Pokemons,
+            clearPlayer2Pokemons,
+            winner,
+            setWinner
+        }}>
             <Switch>
                 <Route path={`${match.path}/`} exact component={StartPage} />
                 <Route path={`${match.path}/board`} component={BoardPage} />

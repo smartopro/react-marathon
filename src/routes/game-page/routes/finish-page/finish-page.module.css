@@ -1,3 +1,29 @@
 .root {
 
 }
+
+.player {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.btnAgain {
+    display: block;
+    text-align: center;
+    width: 250px;
+    margin: 20px auto;
+    border: 2px solid #b900c3;
+    background-color: #b900c3;
+    padding: 20px 50px;
+    color: #FFF;
+    font-family: 'Overlock', Arial, Helvetica, sans-serif;
+    font-size: 2.5em;
+}
+
+.btnAgain:hover {
+    cursor: pointer;
+    color: #000;
+    background-color: transparent;
+}
