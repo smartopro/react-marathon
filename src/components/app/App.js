@@ -25,9 +25,7 @@ function App() {
     return (
         <FirebaseContext.Provider  value={new Firebase()}>
             <Switch>
-                <Route path="/404" render={NotFoundPage}>
-
-                </Route>
+                <Route path="/404" render={NotFoundPage} />
                 <Route>
                     <>
                         <MenuHeader bgActive={!match?.isExact}/>
